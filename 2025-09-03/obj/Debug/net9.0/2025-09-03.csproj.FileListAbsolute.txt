@@ -1,0 +1,15 @@
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\bin\Debug\net9.0\2025-09-03.exe
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\bin\Debug\net9.0\2025-09-03.deps.json
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\bin\Debug\net9.0\2025-09-03.runtimeconfig.json
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\bin\Debug\net9.0\2025-09-03.dll
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\bin\Debug\net9.0\2025-09-03.pdb
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.AssemblyInfoInputs.cache
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.AssemblyInfo.cs
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.csproj.CoreCompileInputs.cache
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.sourcelink.json
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.dll
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\refint\2025-09-03.dll
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.pdb
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\2025-09-03.genruntimeconfig.cache
+C:\Desktop\Schule\Spengergasse\2025-26\2025-2026\2025-09-03\obj\Debug\net9.0\ref\2025-09-03.dll

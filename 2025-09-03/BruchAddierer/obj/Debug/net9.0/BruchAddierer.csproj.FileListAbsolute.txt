@@ -1,0 +1,15 @@
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\bin\Debug\net9.0\BruchAddierer.exe
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\bin\Debug\net9.0\BruchAddierer.deps.json
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\bin\Debug\net9.0\BruchAddierer.runtimeconfig.json
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\bin\Debug\net9.0\BruchAddierer.dll
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\bin\Debug\net9.0\BruchAddierer.pdb
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.AssemblyInfoInputs.cache
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.AssemblyInfo.cs
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.csproj.CoreCompileInputs.cache
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.sourcelink.json
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.dll
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\refint\BruchAddierer.dll
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.pdb
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\BruchAddierer.genruntimeconfig.cache
+C:\Desktop\Schule\Spengergasse\2025-26\SWP\Graf\2025-2026\2025-09-03\BruchAddierer\obj\Debug\net9.0\ref\BruchAddierer.dll
