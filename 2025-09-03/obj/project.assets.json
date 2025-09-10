@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\2025-2026\\2025-09-03\\2025-09-03.csproj",
-      "projectName": "2025-09-03",
-      "projectPath": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\2025-2026\\2025-09-03\\2025-09-03.csproj",
+      "projectUniqueName": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\SWP\\Graf\\2025-2026\\2025-09-03\\BruchAddierer.csproj",
+      "projectName": "BruchAddierer",
+      "projectPath": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\SWP\\Graf\\2025-2026\\2025-09-03\\BruchAddierer.csproj",
       "packagesPath": "C:\\Users\\mateo\\.nuget\\packages\\",
-      "outputPath": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\2025-2026\\2025-09-03\\obj\\",
+      "outputPath": "C:\\Desktop\\Schule\\Spengergasse\\2025-26\\SWP\\Graf\\2025-2026\\2025-09-03\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mateo\\AppData\\Roaming\\NuGet\\NuGet.Config"
