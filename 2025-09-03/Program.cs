@@ -35,10 +35,10 @@ public class Fraction
 
     public static Fraction Parse(string input)
     {
-        // Erwartetes Format: "a b/c" oder nur "b/c" oder nur "a"
+       
         string[] parts = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-        if (parts.Length == 2) // gemischter Bruch
+        if (parts.Length == 2) 
         {
             int whole = int.Parse(parts[0]);
             string[] frac = parts[1].Split('/');
@@ -46,12 +46,12 @@ public class Fraction
             int den = int.Parse(frac[1]);
             return new Fraction(whole * den + num, den);
         }
-        else if (parts.Length == 1 && parts[0].Contains("/")) // echter Bruch
+        else if (parts.Length == 1 && parts[0].Contains("/")) 
         {
             string[] frac = parts[0].Split('/');
             return new Fraction(int.Parse(frac[0]), int.Parse(frac[1]));
         }
-        else if (parts.Length == 1) // ganze Zahl
+        else if (parts.Length == 1) 
         {
             return new Fraction(int.Parse(parts[0]), 1);
         }
