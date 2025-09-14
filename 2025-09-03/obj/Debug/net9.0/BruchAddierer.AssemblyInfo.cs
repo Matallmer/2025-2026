@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BruchAddierer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+965ceee4fe8e6a21ec61bf3160682611164b3b11")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b195e7ebf4c2ac2e56bf08a27baa938800b7b37")]
 [assembly: System.Reflection.AssemblyProductAttribute("BruchAddierer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BruchAddierer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
