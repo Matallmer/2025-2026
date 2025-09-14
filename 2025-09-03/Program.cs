@@ -4,18 +4,33 @@ class Program
 {
     static void Main(string[] args)
     {
-        if (args.Length != 2)
+        try
         {
-            Console.WriteLine("Bitte 2 Brüche angeben, z.B.: dotnet run \"2 3/8\" \"1 5/6\"");
-            return;
+            if (args.Length != 2)
+            {
+                Console.WriteLine("Bitte 2 Brüche angeben, z.B.: dotnet run \"2 3/8\" \"1 5/6\"");
+                return;
+            }
+
+            Fraction f1 = Fraction.Parse(args[0]);
+            Fraction f2 = Fraction.Parse(args[1]);
+
+            Fraction sum = f1 + f2;
+
+            Console.WriteLine(sum.ToMixedString());
         }
-
-        Fraction f1 = Fraction.Parse(args[0]);
-        Fraction f2 = Fraction.Parse(args[1]);
-
-        Fraction sum = f1 + f2;
-
-        Console.WriteLine(sum.ToMixedString());
+        catch (FormatException)
+        {
+            Console.WriteLine("Fehler: Ungültiges Eingabeformat. Bitte geben Sie die Brüche im korrekten Format an (z.B. \"1 2/3\" oder \"3/4\").");
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine($"Fehler: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ein unerwarteter Fehler ist aufgetreten: {ex.Message}");
+        }
     }
 }
 
