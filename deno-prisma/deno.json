@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "dev": "deno run -A --env-file=.env --watch=src src/server.ts",
+    "prisma:generate": "deno run -A prisma generate",
+    "prisma:migrate": "deno run -A prisma migrate",
+    "prisma:studio": "deno run -A prisma studio"
+  },
+
+  "imports": {
+    "@prisma/client": "npm:@prisma/client@6.17.0",
+    "prisma": "npm:prisma@^6.17.0"
+  }
+}
