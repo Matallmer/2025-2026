@@ -1,11 +1,15 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@faker-js/faker@^10.1.0": "10.1.0",
     "npm:@prisma/client@6.17.0": "6.17.0_prisma@6.8.0",
     "npm:prisma@6.8.0": "6.8.0",
     "npm:prisma@^6.17.0": "6.17.0"
   },
   "npm": {
+    "@faker-js/faker@10.1.0": {
+      "integrity": "sha512-C3mrr3b5dRVlKPJdfrAXS8+dq+rq8Qm5SNRazca0JKgw1HQERFmrVb0towvMmw5uu8hHKNiQasMaR/tydf3Zsg=="
+    },
     "@prisma/client@6.17.0_prisma@6.8.0": {
       "integrity": "sha512-b42mTLOdLEZ6e/igu8CLdccAUX9AwHknQQ1+pHOftnzDP2QoyZyFvcANqSLs5ockimFKJnV7Ljf+qrhNYf6oAg==",
       "dependencies": [
@@ -244,6 +248,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@faker-js/faker@^10.1.0",
       "npm:@prisma/client@6.17.0",
       "npm:prisma@^6.17.0"
     ]

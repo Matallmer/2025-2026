@@ -1,4 +1,5 @@
 import { PrismaClient } from "../prisma/client/client.ts";
+import { fakerDE_AT } from "@faker-js/faker";
 
 Deno.env.set("DATABASE_URL", "file:./dev.db");
 const prisma = new PrismaClient();
@@ -7,8 +8,8 @@ async function main() {
   try {
     const newUser = await prisma.user.create({
       data: {
-        email: "Graf@example.com",
-        name: "Graf Georg",
+        email: fakerDE_AT.internet.email(),
+        name: fakerDE_AT.person.firstName(),
       },
     });
 

@@ -3,10 +3,12 @@
     "dev": "deno run -A --env-file=.env --watch=src src/server.ts",
     "prisma:generate": "deno run -A prisma generate",
     "prisma:migrate": "deno run -A prisma migrate",
-    "prisma:studio": "deno run -A prisma studio"
+    "prisma:studio": "deno run -A prisma studio",
+    "seed": "deno run -A --env-file=.env --watch=src prisma/seed.ts"
   },
 
   "imports": {
+    "@faker-js/faker": "npm:@faker-js/faker@^10.1.0",
     "@prisma/client": "npm:@prisma/client@6.17.0",
     "prisma": "npm:prisma@^6.17.0"
   }
