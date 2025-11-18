@@ -1,4 +1,4 @@
-class Bruch
+public class Bruch
 {
     // jetzt kommen die sog. "Attribute" der Klasse oder "Felder"
     private int ganz;
@@ -12,6 +12,12 @@ class Bruch
         string[] teile = teile1[1].Split('/');
         this.zaehler = int.Parse(teile[0]);
         this.nenner = int.Parse(teile[1]);
+
+        if (string.IsNullOrWhiteSpace(bruchtext))
+            throw new FormatException("Bruch darf nicht leer sein.");
+            
+        if (this.nenner == 0)
+            throw new FormatException("Nenner darf nicht 0 sein.");
     }
 
     public Bruch(int ganz, int zaehler, int nenner)
@@ -21,19 +27,42 @@ class Bruch
         this.nenner = nenner;
     }
 
-    public Bruch addiere(Bruch b)
+   private int GGT(int a, int b)
+{
+    while (b != 0)
     {
-        int gemeinsamerNenner = this.nenner * b.nenner;
-        int neuerZaehler = (this.zaehler * b.nenner) + (b.zaehler * this.nenner);
-        int neuerGanz = this.ganz + b.ganz + neuerZaehler / gemeinsamerNenner;
-        int neuerBruchZaehler = neuerZaehler % gemeinsamerNenner;
-
-        return new Bruch(neuerGanz, neuerBruchZaehler, gemeinsamerNenner);
+        int temp = b;
+        b = a % b;
+        a = temp;
     }
+    return a;
+}
+
+public Bruch addiere(Bruch b)
+{
+    int bruch1Zaehler = this.zaehler + this.ganz * this.nenner;
+    int bruch2Zaehler = b.zaehler + b.ganz * b.nenner;
+    int gemeinsamerNenner = this.nenner * b.nenner;
+    int neuerZaehler = (bruch1Zaehler * b.nenner) + (bruch2Zaehler * this.nenner);
+    int ggt = GGT(neuerZaehler, gemeinsamerNenner);
+    neuerZaehler /= ggt;
+    gemeinsamerNenner /= ggt;
+    int neueGanzzahl = neuerZaehler / gemeinsamerNenner;
+    int restZaehler = neuerZaehler % gemeinsamerNenner;
+    return new Bruch(neueGanzzahl, restZaehler, gemeinsamerNenner);
+}
+
+
 
     public string toString()
     {
-        return $"ich bin ein bruch: {this.zaehler}/{this.nenner}";
-        // JS: return `ich bin ein bruch: ${this.zaehler}/${this.nenner}`;
+        if (this.zaehler == 0)
+        {
+            return $"ich bin ein bruch: {this.ganz}";
+        }
+        else
+        {
+            return $"ich bin ein bruch: {this.ganz} {this.zaehler}/{this.nenner}";
+        }
     }
 }

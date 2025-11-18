@@ -6,15 +6,11 @@ class Program
     {
         Console.WriteLine("Hello, World als Klasse!");
 
-        if (args.Length < 2)
+   if (args.Length != 2)
         {
-            Console.WriteLine("Fehler: Bitte zwei Brüche im Format 'ganzzahl zaehler/nenner' eingeben.");
+            Console.WriteLine("Fehler: Bitte genau zwei Brüche im Format \"g z/n\" eingeben.");
+            Console.WriteLine("Beispiel: dotnet run \"1 2/3\" \"0 3/4\"");
             return;
-        }
-
-        foreach (string s in args)
-        {
-            Console.WriteLine(s);
         }
 
         try
@@ -24,7 +20,7 @@ class Program
             Bruch b3 = b1.addiere(b2);
             Console.WriteLine("Ergebnis: " + b3.toString());
         }
-        catch (FormatException ex)
+        catch (FormatException)
         {
             Console.WriteLine("Fehler: Ungültiges Format. Bitte im Format 'ganzzahl zaehler/nenner' eingeben.");
         }
