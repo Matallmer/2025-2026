@@ -1,12 +1,16 @@
-# 2025-2026
+# Schuljahr 2025-2026
 
-Alle selbstständing erledigten Aufgaben hier zu finden
-Demonstration Unterrichtsstunden wie prisma_starter usw... nicht übernommen
-Bei den Hausübungen wurde von dem gegeben Anfangscode(falls vorhanden) weitergearbeitet
+Dieses Repository sammelt alle selbststaendig erledigten Aufgaben aus dem Unterricht und den Hausuebungen.
+
+## Inhalt
+
+- Aufgaben sind nach Datum in Ordnern organisiert (z. B. 2025-11-05, 2026-01-14).
+- Demonstrationsbeispiele aus Unterrichtsstunden (z. B. reine Starter-Demos) sind nicht enthalten.
+- Bei Hausuebungen wurde auf vorhandenem Anfangscode aufgebaut, wenn solcher vorgegeben war.
 
 ## HÜ-Infos
 
-### 2025-11-12:
+### 2025-11-12
 
-Die Hü des 2025-11-12 befindet sich in 2025-11-05 da das nur eine Erweiterung war
-HÜ des 2025-11-12 aufgrund von Krankheit ein paar Stunden verspätet abgegeben
+- Die HÜ vom 2025-11-12 ist im Ordner 2025-11-05 enthalten, da sie eine Erweiterung davon war.
+- Die Abgabe vom 2025-11-12 erfolgte krankheitsbedingt um einige Stunden verspaetet.
