@@ -5,6 +5,17 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "2026-18-03 Launch (console)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-2026-18-03",
+      "program": "${workspaceFolder}/2026-18-03/bin/Debug/net9.0/2026-18-03.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/2026-18-03",
+      "console": "internalConsole",
+      "stopAtEntry": false
+    },
+    {
       "name": ".NET Core Launch (console)",
       "type": "coreclr",
       "request": "launch",
