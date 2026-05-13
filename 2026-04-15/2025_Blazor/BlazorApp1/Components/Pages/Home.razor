@@ -1,9 +1,233 @@
-﻿@page "/"
+@page "/"
+@page "/globebite"
+@rendermode InteractiveServer
+@using BlazorApp1.Models
+@using BlazorApp1.Services
+@inject OpenMeteoService OpenMeteoService
+@inject ILogger<Home> Logger
 
-<PageTitle>Home</PageTitle>
+<PageTitle>CityWeather</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="cityweather-shell">
+    <div class="floating-shape floating-shape-left"></div>
+    <div class="floating-shape floating-shape-right"></div>
 
-Welcome to your new app.
+    <header class="hero-panel reveal-step-1">
+        <p class="hero-tag">Weather Studio</p>
+        <h1>CityWeather</h1>
+        <p class="hero-copy">
+            Eine expressive Wetter-App: Stadt eingeben, sofort Bedingungen sehen,
+            und mit einer animierten Kurzvorschau durch die kommenden Tage scrollen.
+        </p>
+        <div class="hero-chips">
+            <span>Open-Meteo Live</span>
+            <span>Stadtfokus</span>
+            <span>Motion UI</span>
+        </div>
+    </header>
 
-<Counter IncrementAmount="7" />
+    <section class="module reveal-step-2">
+        <div class="module-head">
+            <h2>Stadtsuche</h2>
+            <p>Schnellstart: Wien, Salzburg, Tokyo, Lima ...</p>
+        </div>
+
+        <div class="search-lane">
+            <input class="form-control city-input"
+                   placeholder="Stadtname eingeben"
+                   @bind="locationQuery"
+                   @bind:event="oninput" />
+            <button class="btn btn-primary search-cta"
+                    @onclick="SearchLocationsAsync"
+                    disabled="@isLoadingLocations">
+                @(isLoadingLocations ? "Suche laeuft..." : "Stadt finden")
+            </button>
+        </div>
+
+        @if (!string.IsNullOrWhiteSpace(locationError))
+        {
+            <p class="status-banner error">@locationError</p>
+        }
+
+        @if (locationResults.Count > 0)
+        {
+            <div class="result-grid">
+                @foreach (var item in locationResults.Select((value, index) => new { value, index }))
+                {
+                    <button class="result-card @(selectedLocation == item.value ? "active" : string.Empty)"
+                            style="--stagger:@(item.index * 70)ms"
+                            @onclick="async () => await SelectLocationAsync(item.value)">
+                        <strong>@item.value.DisplayName</strong>
+                        <span>@item.value.Timezone</span>
+                    </button>
+                }
+            </div>
+        }
+    </section>
+
+    <section class="module reveal-step-3">
+        <div class="module-head">
+            <h2>Wetterbuehne</h2>
+            <p>Aktuelle Lage plus Vorschau fuer die naechsten Tage.</p>
+        </div>
+
+        @if (isLoadingWeather)
+        {
+            <p class="status-banner">Wetter wird geladen ...</p>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(weatherError))
+        {
+            <p class="status-banner error">@weatherError</p>
+        }
+
+        @if (selectedLocation is null)
+        {
+            <p class="status-banner">Bitte zuerst eine Stadt auswaehlen.</p>
+        }
+        else if (weatherOverview is not null)
+        {
+            <article class="weather-stage @GetWeatherThemeClass(weatherOverview.WeatherCode)">
+                <div class="weather-core">
+                    <p class="label">Aktuell in</p>
+                    <h3>@weatherOverview.LocationName</h3>
+                    <p class="temperature">@weatherOverview.CurrentTemperatureC.ToString("0.0")<span>C</span></p>
+                    <p class="condition">@weatherOverview.WeatherDescription</p>
+                </div>
+                <div class="weather-meta">
+                    <div class="meta-tile">
+                        <span>Wind</span>
+                        <strong>@weatherOverview.WindSpeedKmH.ToString("0.0") km/h</strong>
+                    </div>
+                    <div class="meta-tile">
+                        <span>Trend</span>
+                        <strong>@DescribeWind(weatherOverview.WindSpeedKmH)</strong>
+                    </div>
+                </div>
+            </article>
+
+            @if (weatherOverview.NextDays.Count > 0)
+            {
+                <div class="forecast-track">
+                    @foreach (var item in weatherOverview.NextDays.Select((value, index) => new { value, index }))
+                    {
+                        <article class="forecast-card"
+                                 style="--stagger:@(140 + item.index * 95)ms">
+                            <p class="day">@FormatForecastDay(item.value.Date)</p>
+                            <p class="forecast-temp">
+                                @item.value.MinTemperatureC.ToString("0")/@item.value.MaxTemperatureC.ToString("0") C
+                            </p>
+                            <p class="forecast-text">@item.value.WeatherDescription</p>
+                        </article>
+                    }
+                </div>
+            }
+        }
+    </section>
+</div>
+
+@code {
+    private readonly List<LocationSearchResult> locationResults = [];
+
+    private string locationQuery = string.Empty;
+    private string? locationError;
+    private string? weatherError;
+
+    private bool isLoadingLocations;
+    private bool isLoadingWeather;
+
+    private LocationSearchResult? selectedLocation;
+    private WeatherOverview? weatherOverview;
+
+    private async Task SearchLocationsAsync()
+    {
+        locationError = null;
+        weatherError = null;
+
+        if (string.IsNullOrWhiteSpace(locationQuery))
+        {
+            locationResults.Clear();
+            return;
+        }
+
+        isLoadingLocations = true;
+
+        try
+        {
+            var results = await OpenMeteoService.SearchLocationsAsync(locationQuery.Trim());
+            locationResults.Clear();
+            locationResults.AddRange(results);
+
+            if (locationResults.Count == 0)
+            {
+                locationError = "Keine Orte gefunden. Bitte den Suchbegriff anpassen.";
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Location search failed.");
+            locationError = "Ortssuche ist fehlgeschlagen. Bitte spaeter erneut versuchen.";
+        }
+        finally
+        {
+            isLoadingLocations = false;
+        }
+    }
+
+    private async Task SelectLocationAsync(LocationSearchResult location)
+    {
+        selectedLocation = location;
+        weatherOverview = null;
+        weatherError = null;
+        isLoadingWeather = true;
+
+        try
+        {
+            weatherOverview = await OpenMeteoService.GetWeatherAsync(location);
+
+            if (weatherOverview is null)
+            {
+                weatherError = "Fuer diese Stadt konnten keine Wetterdaten geladen werden.";
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogWarning(ex, "Weather loading failed.");
+            weatherError = "Wetterdaten konnten nicht geladen werden.";
+        }
+        finally
+        {
+            isLoadingWeather = false;
+        }
+    }
+
+    private static string GetWeatherThemeClass(int code) =>
+        code switch
+        {
+            0 or 1 => "theme-clear",
+            2 or 3 => "theme-cloudy",
+            45 or 48 => "theme-fog",
+            51 or 53 or 55 or 61 or 63 or 65 or 80 or 81 or 82 => "theme-rain",
+            71 or 73 or 75 => "theme-snow",
+            95 or 96 or 99 => "theme-storm",
+            _ => "theme-cloudy"
+        };
+
+    private static string DescribeWind(double windSpeedKmH)
+    {
+        if (windSpeedKmH < 10)
+        {
+            return "ruhig";
+        }
+
+        if (windSpeedKmH < 25)
+        {
+            return "frisch";
+        }
+
+        return "kraeftig";
+    }
+
+    private static string FormatForecastDay(DateOnly date) =>
+        date.ToString("ddd, dd.MM.");
+}

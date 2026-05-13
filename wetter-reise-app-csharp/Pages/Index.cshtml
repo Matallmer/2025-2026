@@ -1,0 +1,218 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Wetter Reise App";
+    var weather = Model.Weather;
+    var statusClass = weather is { IsDay: false } ? "night" : "";
+}
+
+<section class="topbar">
+    <div>
+        <p class="eyebrow">C# ASP.NET Core Wetterassistent</p>
+        <h1>Wetter, Outfit und Ausflugsideen</h1>
+        <p class="hero-copy">Plane deinen Tag mit aktuellen Wetterdaten, passenden Kleidungstipps und spannenden Orten in deiner Nähe.</p>
+        <div class="api-pills" aria-label="Genutzte APIs">
+            <span>Open-Meteo</span>
+            <span>Wikipedia</span>
+        </div>
+    </div>
+
+    <form class="search" method="get">
+        <label class="visually-hidden" for="city">Stadt suchen</label>
+        <input id="city" name="city" type="search" placeholder="Stadt eingeben, z. B. Wien" value="@Model.City" autocomplete="off" />
+        <button type="submit" title="Stadt suchen" aria-label="Stadt suchen">
+            <span class="button-icon" aria-hidden="true">⌕</span>
+            Suchen
+        </button>
+        <button class="ghost-button" id="locationButton" type="button" title="Aktuellen Standort verwenden" aria-label="Aktuellen Standort verwenden">
+            <span class="button-icon" aria-hidden="true">◎</span>
+            Standort
+        </button>
+    </form>
+</section>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <section class="message-panel">
+        <strong>Fehler:</strong> @Model.ErrorMessage
+    </section>
+}
+
+@if (weather is not null)
+{
+    <section class="status-band @statusClass">
+        <div class="weather-scene" aria-hidden="true">
+            <div class="sun-disc"></div>
+            <div class="cloud cloud-one"></div>
+            <div class="cloud cloud-two"></div>
+            @if (weather.WeatherMark is "R" or "T" or "N")
+            {
+                <div class="rain-lines"></div>
+            }
+        </div>
+
+        <div class="current-weather">
+            <p class="eyebrow">@weather.CurrentTime.ToString("dddd, dd. MMMM HH:mm")</p>
+            <h2>@weather.City@if (!string.IsNullOrWhiteSpace(weather.Country)){<text>, @weather.Country</text>}</h2>
+            <div class="temperature-row">
+                <span class="temperature">@weather.Temperature°</span>
+                <div>
+                    <p>@weather.WeatherText</p>
+                    <p class="muted">Gefühlt @weather.FeelsLike° · Wolken @weather.CloudCover%</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="weather-metrics" aria-label="Wetterwerte">
+            <div>
+                <span>Regen</span>
+                <strong>@weather.RainChance%</strong>
+            </div>
+            <div>
+                <span>Wind</span>
+                <strong>@weather.WindSpeed km/h</strong>
+            </div>
+            <div>
+                <span>UV</span>
+                <strong>@weather.UvIndex</strong>
+            </div>
+            <div>
+                <span>Luftfeuchte</span>
+                <strong>@weather.Humidity%</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-grid">
+        <section class="panel outfit-panel">
+            <div class="section-heading">
+                <p class="eyebrow">Kleidung</p>
+                <h2>Was heute Sinn macht</h2>
+            </div>
+            <div class="outfit-list">
+                @foreach (var item in weather.Outfit)
+                {
+                    <article class="outfit-item">
+                        <span class="outfit-symbol" aria-hidden="true">@item.Symbol</span>
+                        <div>
+                            <h3>@item.Title</h3>
+                            <p>@item.Text</p>
+                        </div>
+                    </article>
+                }
+            </div>
+        </section>
+
+        <section class="panel plan-panel">
+            <div class="section-heading">
+                <p class="eyebrow">Tagesplan</p>
+                <h2>@weather.ComfortTitle</h2>
+            </div>
+            <p class="large-copy">@weather.ComfortText</p>
+            <div class="quick-facts">
+                <div><span>Max / Min</span><strong>@weather.TodayMax° / @weather.TodayMin°</strong></div>
+                <div><span>Böe</span><strong>@weather.WindGusts km/h</strong></div>
+                <div><span>Sonnenaufgang</span><strong>@weather.Sunrise.ToString("HH:mm")</strong></div>
+                <div><span>Sonnenuntergang</span><strong>@weather.Sunset.ToString("HH:mm")</strong></div>
+            </div>
+        </section>
+    </section>
+
+    <section class="forecast-section">
+        <div class="section-heading inline-heading">
+            <div>
+                <p class="eyebrow">Vorhersage</p>
+                <h2>Nächste Stunden und Tage</h2>
+            </div>
+        </div>
+        <div class="hourly-strip" aria-label="Stundenprognose">
+            @foreach (var hour in weather.Hourly)
+            {
+                <article class="hour-card">
+                    <time>@hour.Time.ToString("HH:mm")</time>
+                    <span class="weather-mark">@hour.WeatherMark</span>
+                    <strong>@hour.Temperature°</strong>
+                    <p class="muted">@hour.RainChance% Regen</p>
+                </article>
+            }
+        </div>
+        <div class="daily-grid" aria-label="Tagesprognose">
+            @foreach (var day in weather.Daily)
+            {
+                <article class="day-card">
+                    <time>@day.Date.ToString("ddd dd.")</time>
+                    <span class="weather-mark">@day.WeatherMark</span>
+                    <strong>@day.MaxTemperature°</strong>
+                    <p class="muted">@day.MinTemperature° · @day.RainChance%</p>
+                </article>
+            }
+        </div>
+    </section>
+
+    <section class="attractions-section">
+        <div class="section-heading inline-heading">
+            <div>
+                <p class="eyebrow">In der Nähe</p>
+                <h2>Touristenattraktionen</h2>
+            </div>
+            <span class="source-note">Daten: Wikipedia</span>
+        </div>
+        <div class="attraction-grid">
+            @if (weather.Attractions.Count == 0)
+            {
+                <p class="muted">Keine passenden Wikipedia-Orte in der Nähe gefunden.</p>
+            }
+            else
+            {
+                @foreach (var attraction in weather.Attractions)
+                {
+                    <article class="attraction-card">
+                        @if (attraction.ImageUrl is not null)
+                        {
+                            <img class="attraction-image" src="@attraction.ImageUrl" alt="@attraction.Title" loading="lazy" />
+                        }
+                        else
+                        {
+                            <div class="attraction-placeholder" aria-hidden="true">@attraction.Title[..1]</div>
+                        }
+                        <div class="attraction-body">
+                            <h3>@attraction.Title</h3>
+                            <p>@attraction.Extract</p>
+                            <a href="@attraction.Url" target="_blank" rel="noreferrer">Auf Wikipedia ansehen</a>
+                        </div>
+                    </article>
+                }
+            }
+        </div>
+    </section>
+}
+
+<section class="api-section">
+    <p>
+        Genutzte öffentliche APIs: Open-Meteo Forecast API, Open-Meteo Geocoding API und Wikipedia API.
+        Die verlinkte public-apis Sammlung dient als Quelle für frei nutzbare API-Ideen; für diese C#-Version wird kein API-Key benötigt.
+    </p>
+</section>
+
+@section Scripts {
+    <script>
+        document.querySelector("#locationButton")?.addEventListener("click", () => {
+            if (!navigator.geolocation) {
+                alert("Standortabfrage wird von diesem Browser nicht unterstützt.");
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const params = new URLSearchParams({
+                        lat: position.coords.latitude,
+                        lon: position.coords.longitude
+                    });
+                    window.location.href = `/?${params}`;
+                },
+                () => alert("Standort konnte nicht gelesen werden."),
+                { enableHighAccuracy: true, timeout: 8000 }
+            );
+        });
+    </script>
+}
