@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\2025-09-03\BruchAddierer.csproj" />
+    <ProjectReference Include="..\2025-09-03\2025-09-03.csproj" />
   </ItemGroup>
 
 </Project>

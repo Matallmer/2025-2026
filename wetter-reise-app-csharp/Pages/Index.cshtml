@@ -10,7 +10,7 @@
     <div>
         <p class="eyebrow">C# ASP.NET Core Wetterassistent</p>
         <h1>Wetter, Outfit und Ausflugsideen</h1>
-        <p class="hero-copy">Plane deinen Tag mit aktuellen Wetterdaten, passenden Kleidungstipps und spannenden Orten in deiner Nähe.</p>
+        <p class="hero-copy">Plane deinen Tag mit aktuellen Wetterdaten, passenden Kleidungstipps und spannenden Orten in deiner Naehe.</p>
         <div class="api-pills" aria-label="Genutzte APIs">
             <span>Open-Meteo</span>
             <span>Wikipedia</span>
@@ -21,11 +21,11 @@
         <label class="visually-hidden" for="city">Stadt suchen</label>
         <input id="city" name="city" type="search" placeholder="Stadt eingeben, z. B. Wien" value="@Model.City" autocomplete="off" />
         <button type="submit" title="Stadt suchen" aria-label="Stadt suchen">
-            <span class="button-icon" aria-hidden="true">⌕</span>
+            <span class="button-icon" aria-hidden="true">S</span>
             Suchen
         </button>
         <button class="ghost-button" id="locationButton" type="button" title="Aktuellen Standort verwenden" aria-label="Aktuellen Standort verwenden">
-            <span class="button-icon" aria-hidden="true">◎</span>
+            <span class="button-icon" aria-hidden="true">O</span>
             Standort
         </button>
     </form>
@@ -55,10 +55,10 @@
             <p class="eyebrow">@weather.CurrentTime.ToString("dddd, dd. MMMM HH:mm")</p>
             <h2>@weather.City@if (!string.IsNullOrWhiteSpace(weather.Country)){<text>, @weather.Country</text>}</h2>
             <div class="temperature-row">
-                <span class="temperature">@weather.Temperature°</span>
+                <span class="temperature">@weather.Temperature Grad</span>
                 <div>
                     <p>@weather.WeatherText</p>
-                    <p class="muted">Gefühlt @weather.FeelsLike° · Wolken @weather.CloudCover%</p>
+                    <p class="muted">Gefuehlt @weather.FeelsLike Grad | Wolken @weather.CloudCover%</p>
                 </div>
             </div>
         </div>
@@ -110,8 +110,8 @@
             </div>
             <p class="large-copy">@weather.ComfortText</p>
             <div class="quick-facts">
-                <div><span>Max / Min</span><strong>@weather.TodayMax° / @weather.TodayMin°</strong></div>
-                <div><span>Böe</span><strong>@weather.WindGusts km/h</strong></div>
+                <div><span>Max / Min</span><strong>@weather.TodayMax Grad / @weather.TodayMin Grad</strong></div>
+                <div><span>Boe</span><strong>@weather.WindGusts km/h</strong></div>
                 <div><span>Sonnenaufgang</span><strong>@weather.Sunrise.ToString("HH:mm")</strong></div>
                 <div><span>Sonnenuntergang</span><strong>@weather.Sunset.ToString("HH:mm")</strong></div>
             </div>
@@ -122,7 +122,7 @@
         <div class="section-heading inline-heading">
             <div>
                 <p class="eyebrow">Vorhersage</p>
-                <h2>Nächste Stunden und Tage</h2>
+                <h2>Naechste Stunden und Tage</h2>
             </div>
         </div>
         <div class="hourly-strip" aria-label="Stundenprognose">
@@ -131,7 +131,7 @@
                 <article class="hour-card">
                     <time>@hour.Time.ToString("HH:mm")</time>
                     <span class="weather-mark">@hour.WeatherMark</span>
-                    <strong>@hour.Temperature°</strong>
+                    <strong>@hour.Temperature Grad</strong>
                     <p class="muted">@hour.RainChance% Regen</p>
                 </article>
             }
@@ -142,8 +142,8 @@
                 <article class="day-card">
                     <time>@day.Date.ToString("ddd dd.")</time>
                     <span class="weather-mark">@day.WeatherMark</span>
-                    <strong>@day.MaxTemperature°</strong>
-                    <p class="muted">@day.MinTemperature° · @day.RainChance%</p>
+                    <strong>@day.MaxTemperature Grad</strong>
+                    <p class="muted">@day.MinTemperature Grad | @day.RainChance%</p>
                 </article>
             }
         </div>
@@ -152,7 +152,7 @@
     <section class="attractions-section">
         <div class="section-heading inline-heading">
             <div>
-                <p class="eyebrow">In der Nähe</p>
+                <p class="eyebrow">In der Naehe</p>
                 <h2>Touristenattraktionen</h2>
             </div>
             <span class="source-note">Daten: Wikipedia</span>
@@ -160,7 +160,7 @@
         <div class="attraction-grid">
             @if (weather.Attractions.Count == 0)
             {
-                <p class="muted">Keine passenden Wikipedia-Orte in der Nähe gefunden.</p>
+                <p class="muted">Keine passenden Wikipedia-Orte in der Naehe gefunden.</p>
             }
             else
             {
@@ -189,8 +189,8 @@
 
 <section class="api-section">
     <p>
-        Genutzte öffentliche APIs: Open-Meteo Forecast API, Open-Meteo Geocoding API und Wikipedia API.
-        Die verlinkte public-apis Sammlung dient als Quelle für frei nutzbare API-Ideen; für diese C#-Version wird kein API-Key benötigt.
+        Genutzte oeffentliche APIs: Open-Meteo Forecast API, Open-Meteo Geocoding API und Wikipedia API.
+        Die verlinkte public-apis Sammlung dient als Quelle fuer frei nutzbare API-Ideen; fuer diese C#-Version wird kein API-Key benoetigt.
     </p>
 </section>
 
@@ -198,7 +198,7 @@
     <script>
         document.querySelector("#locationButton")?.addEventListener("click", () => {
             if (!navigator.geolocation) {
-                alert("Standortabfrage wird von diesem Browser nicht unterstützt.");
+                alert("Standortabfrage wird von diesem Browser nicht unterstuetzt.");
                 return;
             }
 

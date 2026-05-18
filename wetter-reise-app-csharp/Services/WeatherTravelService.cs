@@ -16,8 +16,8 @@ public sealed class WeatherTravelService
     {
         [0] = ("Klarer Himmel", "S"),
         [1] = ("Meist sonnig", "S"),
-        [2] = ("Teilweise bewölkt", "C"),
-        [3] = ("Bewölkt", "C"),
+        [2] = ("Teilweise bewoelkt", "C"),
+        [3] = ("Bewoelkt", "C"),
         [45] = ("Nebel", "F"),
         [48] = ("Raureifnebel", "F"),
         [51] = ("Leichter Nieselregen", "R"),
@@ -29,7 +29,7 @@ public sealed class WeatherTravelService
         [71] = ("Leichter Schneefall", "N"),
         [73] = ("Schneefall", "N"),
         [75] = ("Starker Schneefall", "N"),
-        [77] = ("Schneekörner", "N"),
+        [77] = ("Schneekoerner", "N"),
         [80] = ("Regenschauer", "R"),
         [81] = ("Starke Regenschauer", "R"),
         [82] = ("Heftige Regenschauer", "R"),
@@ -48,7 +48,6 @@ public sealed class WeatherTravelService
         "bahnhof",
         "haltestelle",
         "strasse",
-        "straße",
         "autobahn",
         "bezirksteil"
     ];
@@ -64,7 +63,7 @@ public sealed class WeatherTravelService
     public async Task<WeatherTravelViewModel> GetForCityAsync(string? city, CancellationToken cancellationToken)
     {
         var place = string.IsNullOrWhiteSpace(city)
-            ? new GeoPlace("Wien", "Österreich", 48.2085, 16.3721)
+            ? new GeoPlace("Wien", "Oesterreich", 48.2085, 16.3721)
             : await SearchCityAsync(city, cancellationToken);
 
         return await GetForPlaceAsync(place, cancellationToken);
@@ -181,8 +180,8 @@ public sealed class WeatherTravelService
 
                 var pageId = page.GetProperty("pageid").GetInt32();
                 var extract = page.TryGetProperty("extract", out var extractElement)
-                    ? extractElement.GetString() ?? "Kurzbeschreibung ist auf Wikipedia verfügbar."
-                    : "Kurzbeschreibung ist auf Wikipedia verfügbar.";
+                    ? extractElement.GetString() ?? "Kurzbeschreibung ist auf Wikipedia verfuegbar."
+                    : "Kurzbeschreibung ist auf Wikipedia verfuegbar.";
                 var imageUrl = page.TryGetProperty("thumbnail", out var thumbnail)
                     && thumbnail.TryGetProperty("source", out var source)
                     ? source.GetString()
@@ -256,11 +255,11 @@ public sealed class WeatherTravelService
 
         if (feelsLike <= 0)
         {
-            items.Add(new("W", "Winterjacke", "Sehr kalt: dicke Jacke, Mütze und Handschuhe einplanen."));
+            items.Add(new("W", "Winterjacke", "Sehr kalt: dicke Jacke, Muetze und Handschuhe einplanen."));
         }
         else if (feelsLike <= 8)
         {
-            items.Add(new("J", "Warme Jacke", "Kalt genug für Schal und eine isolierende Schicht."));
+            items.Add(new("J", "Warme Jacke", "Kalt genug fuer Schal und eine isolierende Schicht."));
         }
         else if (feelsLike <= 15)
         {
@@ -268,7 +267,7 @@ public sealed class WeatherTravelService
         }
         else if (feelsLike <= 22)
         {
-            items.Add(new("M", "Leichte Schicht", "T-Shirt oder Hemd, dazu eine dünne Jacke für Schatten und Abend."));
+            items.Add(new("M", "Leichte Schicht", "T-Shirt oder Hemd, dazu eine duenne Jacke fuer Schatten und Abend."));
         }
         else if (feelsLike <= 28)
         {
@@ -281,7 +280,7 @@ public sealed class WeatherTravelService
 
         if (rainChance >= 45 || IsRainCode(weatherCode))
         {
-            items.Add(new("R", "Regenschutz", "Schirm oder Regenjacke mitnehmen, Schuhe besser wasserfest wählen."));
+            items.Add(new("R", "Regenschutz", "Schirm oder Regenjacke mitnehmen, Schuhe besser wasserfest waehlen."));
         }
 
         if (IsSnowCode(weatherCode))
@@ -301,7 +300,7 @@ public sealed class WeatherTravelService
 
         if (items.Count < 4)
         {
-            items.Add(new("B", "Bequeme Schuhe", "Gut für Stadtspaziergang und Sehenswürdigkeiten in der Nähe."));
+            items.Add(new("B", "Bequeme Schuhe", "Gut fuer Stadtspaziergang und Sehenswuerdigkeiten in der Naehe."));
         }
 
         return items.Take(5).ToList();
@@ -319,10 +318,10 @@ public sealed class WeatherTravelService
 
         return score switch
         {
-            >= 78 => ("Sehr gut für draußen", "Das Wetter spielt mit. Plane Sehenswürdigkeiten, Spaziergang und längere Wege ruhig großzügig ein."),
-            >= 58 => ("Gut mit etwas Planung", "Draußen ist gut machbar. Nimm die Kleidungsempfehlung ernst und halte eine Indoor-Option bereit."),
+            >= 78 => ("Sehr gut fuer draussen", "Das Wetter spielt mit. Plane Sehenswuerdigkeiten, Spaziergang und laengere Wege ruhig grosszuegig ein."),
+            >= 58 => ("Gut mit etwas Planung", "Draussen ist gut machbar. Nimm die Kleidungsempfehlung ernst und halte eine Indoor-Option bereit."),
             >= 38 => ("Gemischter Tag", "Kurze Wege, Pausen und wetterfeste Kleidung sind heute die bessere Strategie."),
-            _ => ("Eher Indoor-freundlich", "Das Wetter ist anspruchsvoll. Museen, Cafés oder kurze Attraktionsstopps sind heute angenehmer.")
+            _ => ("Eher Indoor-freundlich", "Das Wetter ist anspruchsvoll. Museen, Cafes oder kurze Attraktionsstopps sind heute angenehmer.")
         };
     }
 
